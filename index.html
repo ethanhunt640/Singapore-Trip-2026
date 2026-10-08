@@ -535,11 +535,19 @@ async function loadWeather(){
 loadWeather();
 
 // ---- Live exchange rates (Frankfurter.app, ECB rates, no key required) ----
-let AUD_PER_SGD = null, AUD_PER_MYR = null;
+// Fallback rates below are a snapshot taken Oct 9, 2026, used only if the live fetch fails,
+// so the converter still works (just not with today's exact rate) instead of going dead.
+const FALLBACK_SGD_PER_AUD = 0.8919;
+const FALLBACK_MYR_PER_AUD = 2.74;
+const FALLBACK_DATE = "Oct 9, 2026";
+
+let AUD_PER_SGD = 1/FALLBACK_SGD_PER_AUD;
+let AUD_PER_MYR = 1/FALLBACK_MYR_PER_AUD;
+
 async function loadFx(){
   const note = document.getElementById('fxNote');
   try{
-    const res = await fetch('https://api.frankfurter.app/latest?from=AUD&to=SGD,MYR');
+    const res = await fetch('https://api.frankfurter.app/latest?base=AUD&symbols=SGD,MYR');
     if(!res.ok) throw new Error('fx fetch failed');
     const data = await res.json();
     const sgdPerAud = data.rates.SGD;
@@ -547,11 +555,15 @@ async function loadFx(){
     AUD_PER_SGD = 1/sgdPerAud;
     AUD_PER_MYR = 1/myrPerAud;
     note.textContent = `Live rate: 1 AUD ≈ ${sgdPerAud.toFixed(4)} SGD, 1 AUD ≈ ${myrPerAud.toFixed(4)} MYR (ECB, updated ${data.date}).`;
-    // re-run any pending conversions with fresh rates
-    recalcFx();
   }catch(e){
-    note.textContent = "Live rates unavailable right now — check your connection and reload.";
+    console.error('FX fetch error:', e);
+    // Fall back to the snapshot rates set above — conversion keeps working, just not with today's live rate
+    AUD_PER_SGD = 1/FALLBACK_SGD_PER_AUD;
+    AUD_PER_MYR = 1/FALLBACK_MYR_PER_AUD;
+    note.textContent = `Couldn't fetch live rates — using a fallback snapshot from ${FALLBACK_DATE} (1 AUD ≈ ${FALLBACK_SGD_PER_AUD} SGD, 1 AUD ≈ ${FALLBACK_MYR_PER_AUD} MYR). Reload to try live rates again.`;
   }
+  // re-run any pending conversions with whichever rates are now set (live or fallback)
+  recalcFx();
 }
 function wireFx(inputId, outputId, getRate){
   const inp = document.getElementById(inputId);
