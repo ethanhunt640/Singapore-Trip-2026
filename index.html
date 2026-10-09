@@ -81,6 +81,12 @@ section.active{display:block;}
 .meal li{font-size:15.6px;line-height:1.45;margin-bottom:4px;}
 .veg{color:var(--leaf-dark);font-weight:700;font-size:14.4px;text-transform:uppercase;letter-spacing:.03em;}
 .chk{color:var(--coral);font-weight:700;font-size:14.4px;text-transform:uppercase;letter-spacing:.03em;}
+.rcard{margin:0 0 .9rem;padding:.7rem 0;border-bottom:1px dashed rgba(0,0,0,.08);}
+.rcard:last-child{border-bottom:none;}
+.rname{font-size:16.8px;font-weight:700;color:var(--sea-dark);margin-bottom:2px;}
+.rnote{font-size:12.8px;opacity:.6;margin-bottom:5px;line-height:1.4;}
+.rcard div.veg,.rcard div.chk{display:inline;}
+.rcard>div:not(.rname):not(.rnote){font-size:14.4px;margin-bottom:2px;line-height:1.4;}
 a{color:var(--sea-dark);text-decoration:underline;text-decoration-color:color-mix(in srgb, var(--sea-dark) 40%, transparent);}
 .cat{margin-bottom:1.65rem;}
 .cat h3{font-size:16.8px;color:var(--sea-dark);margin:0 0 .75rem;font-weight:700;border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:7px;}
@@ -195,12 +201,11 @@ const itinerary = [
    ["10:45-20:00","Fly SYD → SIN (1 stop)"],
    ["Evening","Transfer to friends' place, 53 Changi South Ave 1"]
  ], meals:{
-   dinner:{veg:['<a href="https://www.timeout.com/singapore/restaurants/soul-alife" target="_blank">Soul ALife</a> — fully plant-based, Changi City Point #02-40, ~5 min walk',
-                'Gin Khao — Thai, curated vegetarian dishes, same mall',
-                "A vegetarian stall at Changi City Point's basement food court"],
-            chk:['<a href="https://eatbook.sg/changi-city-point-food/" target="_blank">Wok Master</a> — zi char with chicken dishes, same mall',
-                 'Paper Rice Vietnamese Kitchen — chicken pho and banh mi, same mall',
-                 "Han's — Western comfort food, chicken chop"]}
+   dinner:{restaurants:[
+     {name:"Gin Khao", link:"https://hungrygowhere.com/what-to-eat/changi-city-point-food/", note:"Thai, Changi City Point, ~5 min walk — one menu, both diets", veg:"Vegetarian green curry or pad pak (stir-fried mixed veg)", chk:"Pad kra pao chicken or Thai chicken green curry"},
+     {name:"Wok Master", link:"https://eatbook.sg/changi-city-point-food/", note:"Zi char, same mall — order family-style and split", veg:"Yong tau foo or stir-fried vegetables with tofu", chk:"Sweet and sour chicken or ginger chicken"},
+     {name:"Paper Rice Vietnamese Kitchen", link:"https://eatbook.sg/changi-city-point-food/", note:"Vietnamese, same mall", veg:"Vegetarian spring rolls and vermicelli", chk:"Chicken pho or chicken banh mi"}
+   ]}
  }},
 
  {date:"Sat Oct 10", loc:"Singapore → Penang", items:[
@@ -212,12 +217,11 @@ const itinerary = [
    ["21:40-22:55","Fly SIN → PEN (AirAsia, non-stop)"],
    ["Night","Transfer to Royale Chulan Penang, Pengkalan Weld"]
  ], meals:{
-   lunch:{veg:["Soup Restaurant, VivoCity — vegetable-based soups and sides",
-               "PUTIEN, VivoCity — Hainanese-Fujian, several vegetable dishes",
-               "A vegetarian stall at VivoCity's basement food court"],
-          chk:["PUTIEN, VivoCity — known for Hainanese-style chicken rice",
-               "Soup Restaurant, VivoCity — herbal chicken soup",
-               "A Hainanese chicken rice stall at VivoCity's food court"]}
+   lunch:{restaurants:[
+     {name:"PUTIEN", link:"https://www.putien.com/", note:"Hainanese-Fujian chain, VivoCity — official site has the full menu", veg:"Stir-fried greens (choy sum/kailan) or braised beancurd", chk:"PUTIEN's signature Hainanese-style chicken"},
+     {name:"Soup Restaurant", link:"https://www.soup.com.sg/", note:"VivoCity, official site has the menu", veg:"Herbal vegetable soup or braised tofu claypot", chk:"Samsui ginger chicken — their signature dish"},
+     {name:"VivoCity basement food court", link:"", note:"Multiple stalls, same seating area", veg:"Any vegetarian/mock-meat stall", chk:"Hainanese chicken rice stall"}
+   ]}
  }},
 
  {date:"Sun Oct 11", loc:"Penang — George Town (hotel: Royale Chulan Penang, Pengkalan Weld)", items:[
@@ -226,24 +230,19 @@ const itinerary = [
    ["Afternoon","Cheong Fatt Tze Mansion (Blue Mansion) tour"],
    ["Evening","Kimberley Street hawker stalls"]
  ], meals:{
-   breakfast:{veg:['<a href="https://guide.michelin.com/my/en/pulau-pinang/my-george-town/restaurant/ali-nasi-lemak-daun-pisang" target="_blank">Ali Nasi Lemak Daun Pisang</a> — Michelin Guide-listed, Sri Weld Food Court, ~5 min walk, ask for the egg/veg topping',
-                   "Toh Soon Cafe — historic kopitiam, kaya toast and eggs, short walk from the hotel",
-                   "Sri Ananda Bahwan — pure veg South Indian, ~20 min walk, worth it for a sit-down breakfast"],
-               chk:["Ali Nasi Lemak Daun Pisang — fried chicken/anchovy topping, same stall",
-                    "Toh Soon Cafe — kopitiam breakfast, short walk from the hotel",
-                    "A mamak stall on Chulia Street — roti canai with chicken curry"]},
-   lunch:{veg:["Woodlands Vegetarian Restaurant, Penang Street — pure veg banana leaf, ~12-15 min from Khoo Kongsi",
-               '<a href="https://www.jawihouse.com/" target="_blank">Jawi House Cafe Gallery</a> — Malay/Jawi Peranakan, has vegetable dishes, right on Armenian Street',
-               "The Garden Banana Leaf — authentic veg banana leaf rice, Little India area"],
-          chk:['<a href="https://www.jawihouse.com/" target="_blank">Jawi House Cafe Gallery</a> — chicken curry and rendang, Armenian Street',
-               "Tek Sen Restaurant — popular local favourite, kung po chicken among its dishes",
-               "A nasi kandar stall near Chulia Street"]},
-   dinner:{veg:["A vegetarian char kway teow stall, Kimberley Street Food Night Market",
-                "A popiah stall, same market — naturally vegetarian",
-                "Evergreen Vegetarian Food, George Town"],
-           chk:["A chicken satay stall, Kimberley Street Food Night Market",
-                "A nasi kandar chicken curry stall, same market",
-                "Char kway teow with chicken/prawn, same market"]}
+   breakfast:{restaurants:[
+     {name:"Ali Nasi Lemak Daun Pisang", link:"https://guide.michelin.com/my/en/pulau-pinang/my-george-town/restaurant/ali-nasi-lemak-daun-pisang", note:"Michelin Guide-listed, Sri Weld Food Court, ~5 min walk from the hotel — the nasi lemak itself comes with topping choices", veg:"Nasi lemak with egg and vegetable sambal, no anchovy/meat topping", chk:"Nasi lemak with fried chicken topping"},
+     {name:"Toh Soon Cafe", link:"https://www.wheregoesrose.com/street-food-penang/", note:"Historic kopitiam, covered in Where Goes Rose's independent Penang food guide", veg:"Kaya toast and soft-boiled eggs", chk:"Same, plus a side of chicken floss toast if available"},
+     {name:"A mamak stall, Chulia Street", link:"", note:"24-hour Indian-Muslim stalls — naturally dual menu", veg:"Roti canai with dhal or vegetable curry", chk:"Roti canai with chicken curry"}
+   ]},
+   lunch:{restaurants:[
+     {name:"Jawi House Cafe Gallery", link:"https://www.jawihouse.com/", note:"4.5★, 705+ reviews, Armenian Street — confirmed vegetarian Nyonya Nasi Ulam alongside regular Malay dishes", veg:"Vegetarian Nyonya Nasi Ulam (their named veg specialty)", chk:"Chicken rendang or ayam masak merah"},
+     {name:"Shusi Banana Leaf Restaurant", link:"", note:"Penang Street — featured in Where Goes Rose's guide and Malay Mail's banana leaf roundup; veg rice with your choice of meat curry", veg:"Banana leaf rice with vegetable curries only", chk:"Banana leaf rice with chicken curry"},
+     {name:"Passions of Kerala", link:"", note:"George Town — profiled by Malay Mail (independent press, not a paid listing)", veg:"Banana leaf set, vegetarian sides and chutneys", chk:"Banana leaf set with chicken or crab curry add-on"}
+   ]},
+   dinner:{restaurants:[
+     {name:"Kimberley Street Food Night Market", link:"", note:"Multiple stalls, shared seating — pick your own dish each", veg:"Vegetarian char kway teow or a popiah stall", chk:"Chicken satay or nasi kandar chicken curry stall"}
+   ]}
  }},
 
  {date:"Mon Oct 12", loc:"Penang — Penang Hill & Kek Lok Si (Ayer Itam, ~20 min drive from hotel)", items:[
@@ -251,42 +250,33 @@ const itinerary = [
    ["Afternoon","Free time / lunch in the city"],
    ["Evening","Kek Lok Si Temple, lit up at night"]
  ], meals:{
-   breakfast:{veg:["A kopitiam near Beach Street, ~5-10 min from the hotel",
-                   "Toh Soon Cafe, same area",
-                   "Ali Nasi Lemak Daun Pisang again, veg topping"],
-              chk:["Same kopitiam near Beach Street — toast, eggs, kopi",
-                   "Ali Nasi Lemak with fried chicken topping",
-                   "A mamak stall for roti canai with chicken curry"]},
-   lunch:{veg:["Purple Stone Vegetarian Food Centre, Ayer Itam — right by the Penang Hill base station",
-               "Sun Vegetarian Cuisine, Ayer Itam",
-               "Kek Lok Si Vegetarian Restaurant, if visiting the temple area midday"],
-          chk:['<a href="https://www.tripadvisor.com/Restaurant_Review-g4327677-d15119969-Reviews-Nasi_Kandar_Kampung_Melayu-Air_Itam_Penang_Island_Penang.html" target="_blank">Nasi Kandar Kampung Melayu</a> — Malay nasi kandar with chicken curry, Ayer Itam',
-               "Ah Leng Char Koay Teow — can add chicken/prawn, Ayer Itam",
-               "A hawker stall at Ayer Itam Market for chicken rice"]},
-   dinner:{veg:["Kek Lok Si Vegetarian Restaurant — at the temple itself",
-                "Purple Stone Vegetarian Food Centre, if still open",
-                "Evergreen Vegetarian Food, George Town, as a fallback on the way back"],
-           chk:["Nasi Kandar Kampung Melayu, if open for dinner",
-                "Spink In The Sky — rooftop Chinese BBQ with chicken dishes and a view, Ayer Itam",
-                "A hawker stall at Ayer Itam Market"]}
+   breakfast:{restaurants:[
+     {name:"A kopitiam, Beach Street", link:"", note:"~5-10 min from the hotel before heading to Ayer Itam", veg:"Toast and eggs", chk:"Same, plus a chicken porridge if on the menu"},
+     {name:"Ali Nasi Lemak Daun Pisang", link:"https://guide.michelin.com/my/en/pulau-pinang/my-george-town/restaurant/ali-nasi-lemak-daun-pisang", note:"Same stall as Oct 11, Michelin-listed", veg:"Egg/veg topping", chk:"Fried chicken topping"},
+     {name:"A mamak stall, Chulia Street", link:"", note:"Dual by nature", veg:"Roti canai with dhal", chk:"Roti canai with chicken curry"}
+   ]},
+   lunch:{restaurants:[
+     {name:"Nasi Kandar Kampung Melayu", link:"https://www.tripadvisor.com/Restaurant_Review-g4327677-d15119969-Reviews-Nasi_Kandar_Kampung_Melayu-Air_Itam_Penang_Island_Penang.html", note:"Air Itam, opens 6:30am, Malay nasi kandar — rice plus your choice of curries side by side", veg:"Vegetable curry sides (terung/okra/dhal)", chk:"Chicken curry over rice"},
+     {name:"Ayer Itam Market hawker stalls", link:"", note:"Nasi campur (mixed rice) stalls — pick your own sides", veg:"Vegetable-only sides from the mixed rice counter", chk:"Chicken sides from the same counter"}
+   ]},
+   dinner:{restaurants:[
+     {name:"Nasi Kandar Kampung Melayu", link:"https://www.tripadvisor.com/Restaurant_Review-g4327677-d15119969-Reviews-Nasi_Kandar_Kampung_Melayu-Air_Itam_Penang_Island_Penang.html", note:"If open for dinner, same dual nasi kandar format", veg:"Vegetable curry sides", chk:"Chicken curry"},
+     {name:"Ayer Itam Market hawker stalls", link:"", note:"Evening stalls, same format", veg:"Vegetable sides", chk:"Chicken-based dishes"}
+   ]}
  }},
 
  {date:"Tue Oct 13", loc:"Penang — Batu Ferringhi & Gurney Drive / New Lane", items:[
    ["Morning-Midday","Batu Ferringhi beach half-day"],
    ["Evening","Gurney Drive or New Lane hawker dinner"]
  ], meals:{
-   lunch:{veg:["Kafe Long Beach (Long Beach Café) — hawker food court on the beach, vegetarian options noted on several stalls",
-               "Changyuan Food Center — oldest hawker centre near Batu Ferringhi, Malay snacks with veg options",
-               "A beachfront café for veg fried rice or noodles"],
-          chk:["Kafe Long Beach — chicken wings and satay are a highlight",
-               "Changyuan Food Center — roasted chicken wings",
-               "A beachfront café for chicken rendang or satay"]},
-   dinner:{veg:["Gurney Drive's dedicated vegetarian stall section — char kway teow, cendol, popiah",
-                "A popiah stall, New Lane Hawker Stalls",
-                "A vegetarian char kway teow stall, New Lane"],
-           chk:["New Lane hawker stalls — chicken satay",
-                "Gurney Drive — Hokkien mee with chicken",
-                "A nasi kandar stall near Gurney Drive"]}
+   lunch:{restaurants:[
+     {name:"Kafe Long Beach (Long Beach Café)", link:"", note:"Beachfront hawker food court — vegetarian stalls noted, chicken wings a highlight", veg:"Vegetarian fried noodles or rice from a dedicated stall", chk:"Chicken wings or satay, their known highlight"},
+     {name:"Changyuan Food Center", link:"", note:"Oldest hawker centre near Batu Ferringhi — Malay snacks with both options", veg:"Vegetable-based Malay snacks/noodles", chk:"Roasted chicken wings"}
+   ]},
+   dinner:{restaurants:[
+     {name:"Gurney Drive hawker centre", link:"", note:"Has a dedicated vegetarian stall section plus chicken satay stalls, same seating area", veg:"Vegetarian char kway teow, cendol, or popiah", chk:"Chicken satay or Hokkien mee with chicken"},
+     {name:"New Lane Hawker Stalls", link:"", note:"Similar mixed-stall format", veg:"Popiah or vegetarian noodles", chk:"Chicken satay stall"}
+   ]}
  }},
 
  {date:"Wed Oct 14", loc:"Penang → Singapore (Clan Jetties & Little India, ~20 min walk from hotel)", items:[
@@ -295,18 +285,15 @@ const itinerary = [
    ["19:35-21:00","Fly PEN → SIN (AirAsia, non-stop)"],
    ["Night","Back to friends' place"]
  ], meals:{
-   breakfast:{veg:["Ali Nasi Lemak Daun Pisang again, near the hotel",
-                   "A kopitiam near Chew Jetty",
-                   "Toh Soon Cafe before heading out"],
-              chk:["Ali Nasi Lemak with chicken topping",
-                   "A kopitiam near Chew Jetty for toast and eggs",
-                   "A mamak stall for roti canai with chicken curry"]},
-   lunch:{veg:["Sri Ananda Bahwan, Lebuh Penang (Little India) — pure veg banana leaf",
-               "Woodlands Vegetarian Restaurant, Penang Street",
-               "Madras New Woodlands, Lebuh Penang — largely vegetarian despite the name"],
-          chk:["Passions of Kerala Restaurant — banana leaf with chicken/prawn options",
-               "A nasi kandar stall, Lebuh Penang",
-               "Restaurant Veloo Villas — banana leaf with non-veg options"]}
+   breakfast:{restaurants:[
+     {name:"Ali Nasi Lemak Daun Pisang", link:"https://guide.michelin.com/my/en/pulau-pinang/my-george-town/restaurant/ali-nasi-lemak-daun-pisang", note:"Near the hotel, one more visit before you fly out", veg:"Egg/veg topping", chk:"Fried chicken topping"},
+     {name:"A kopitiam near Chew Jetty", link:"", note:"Toast and eggs, both diets", veg:"Kaya toast", chk:"Same, add a chicken floss option if available"}
+   ]},
+   lunch:{restaurants:[
+     {name:"Passions of Kerala", link:"", note:"Little India Penang, profiled by Malay Mail", veg:"Banana leaf, vegetarian sides", chk:"Banana leaf with chicken/crab curry"},
+     {name:"Shusi Banana Leaf Restaurant", link:"", note:"Penang Street", veg:"Vegetable curry banana leaf", chk:"Chicken curry banana leaf"},
+     {name:"Muthu's Traditional Banana Leaf Rice", link:"", note:"No signboard, Acheen Street — a Penang institution covered repeatedly by Malay Mail's food desk", veg:"Vegetable-only banana leaf set", chk:"Banana leaf set with chicken curry"}
+   ]}
  }},
 
  {date:"Thu Oct 15", loc:"Singapore", items:[
@@ -315,48 +302,36 @@ const itinerary = [
    ["Afternoon","Kampong Glam — Sultan Mosque, Haji Lane"],
    ["Evening","Little India — Tekka Centre"]
  ], meals:{
-   breakfast:{veg:["A vegetarian stall at Chinatown Complex Food Centre",
-                   "Ya Kun Kaya Toast — toast and eggs, order without ham",
-                   "A kopitiam near Chinatown"],
-              chk:["A chicken rice stall at Chinatown Complex Food Centre",
-                   "Ya Kun Kaya Toast, same area",
-                   "A stall for chicken porridge nearby"]},
-   lunch:{veg:["A vegetarian stall at Maxwell Food Centre",
-               "Komala Vilas, Little India, a short ride away",
-               "Ananda Bhavan, Little India"],
-          chk:["Tian Tian Hainanese Chicken Rice, Maxwell Food Centre — the famous stall, expect a queue",
-               "Another chicken rice stall at Maxwell Food Centre",
-               "A chicken satay stall, same food centre"]},
-   dinner:{veg:["Komala Vilas, Little India — unlimited banana leaf thali",
-                "Ananda Bhavan, Little India",
-                "A vegetarian stall at Tekka Centre"],
-           chk:["A chicken biryani stall, Tekka Centre",
-                "Khansama Tandoori Restaurant — tandoori chicken, Little India",
-                "The Banana Leaf Apolo — veg and non-veg banana leaf, Little India"]}
+   breakfast:{restaurants:[
+     {name:"Chinatown Complex Food Centre", link:"", note:"Many stalls, one seating hall", veg:"A vegetarian/mock-meat stall", chk:"A chicken rice or chicken porridge stall"},
+     {name:"Ya Kun Kaya Toast", link:"https://www.yakun.com/", note:"Chain, official site has the menu", veg:"Kaya toast and eggs (order without ham)", chk:"Same, add a chicken floss option if available"}
+   ]},
+   lunch:{restaurants:[
+     {name:"Maxwell Food Centre", link:"", note:"Many stalls, one seating hall", veg:"A vegetarian stall", chk:"Tian Tian Hainanese Chicken Rice — the famous stall, expect a queue"},
+     {name:"The Banana Leaf Apolo", link:"https://thebananaleafapolo.com/", note:"Little India institution, official site has veg and non-veg banana leaf menus side by side", veg:"Vegetarian banana leaf set", chk:"Banana leaf with chicken curry"}
+   ]},
+   dinner:{restaurants:[
+     {name:"The Banana Leaf Apolo", link:"https://thebananaleafapolo.com/", note:"Same as lunch, strong dinner option too", veg:"Vegetarian banana leaf set", chk:"Chicken curry banana leaf"},
+     {name:"Tekka Centre", link:"", note:"Hawker stalls, one seating hall", veg:"A vegetarian stall", chk:"A chicken biryani stall"},
+     {name:"Khansama Tandoori Restaurant", link:"", note:"Little India — tandoori format naturally splits veg/non-veg", veg:"Paneer tikka or vegetable tandoori platter", chk:"Tandoori chicken"}
+   ]}
  }},
 
  {date:"Fri Oct 16", loc:"Singapore", items:[
    ["Day","Sentosa — cable car, beaches, or Universal Studios"],
    ["Evening","Farewell dinner with your friends"]
  ], meals:{
-   breakfast:{veg:["VivoCity food court, a vegetarian stall, before heading to Sentosa",
-                   "VeganBurg, VivoCity",
-                   "A kopitiam near VivoCity"],
-              chk:["A chicken rice or chicken porridge stall at VivoCity's food court",
-                   "A kopitiam near VivoCity for eggs and toast",
-                   "Any food court option at Beach Station once on Sentosa"]},
-   lunch:{veg:["Coastes, Siloso Beach — has vegetarian dishes",
-               "Trapizza — wood-fired pizza with veg toppings",
-               "A food court stall at Beach Station"],
-          chk:["Coastes — chicken dishes on the menu",
-               "Trapizza — chicken toppings available",
-               "A hawker stall at Beach Station for chicken rice"]},
-   dinner:{veg:["Ask your friends for their favourite neighbourhood spot — best way to end the trip with them",
-                "VeganBurg or a vegetarian stall wherever they suggest",
-                "A vegetarian-friendly restaurant near their place"],
-           chk:["Ask your friends for their go-to chicken dish spot",
-                "A hawker centre near their neighbourhood",
-                "Any Hainanese chicken rice stall nearby"]}
+   breakfast:{restaurants:[
+     {name:"VivoCity food court", link:"", note:"Before heading to Sentosa", veg:"A vegetarian stall", chk:"A chicken rice/porridge stall"}
+   ]},
+   lunch:{restaurants:[
+     {name:"Coastes", link:"https://coastes.com/", note:"Siloso Beach, official site has the menu — full Western menu with both diets", veg:"Veg pasta or salad bowl", chk:"Grilled chicken dishes on the mains menu"},
+     {name:"Trapizza", link:"https://trapizza.com.sg/", note:"Siloso Beach, official site has the menu", veg:"Margherita or vegetable wood-fired pizza", chk:"Chicken-topped pizza"},
+     {name:"Beach Station food court", link:"", note:"Multiple stalls", veg:"A vegetarian stall", chk:"A chicken rice stall"}
+   ]},
+   dinner:{restaurants:[
+     {name:"Ask your friends", link:"", note:"Best way to end the trip with them — their go-to spot will likely have both options anyway", veg:"Whatever they recommend", chk:"Whatever they recommend"}
+   ]}
  }},
 
  {date:"Sat Oct 17", loc:"KUL layover (~11h)", items:[
@@ -370,12 +345,11 @@ const itinerary = [
    ["17:00-17:30","Head back to KLIA, check-in/security"],
    ["Evening","Depart KUL → SYD"]
  ], meals:{
-   lunch:{veg:["A vegetarian stall at Suria KLCC food court",
-               "An Indian vegetarian option at Suria KLCC",
-               "A Western/pasta vegetarian option, same food court"],
-          chk:["Nasi lemak with chicken, Suria KLCC food court",
-               "Nando's, Suria KLCC — chicken, quick before the airport",
-               "A chicken rice stall, same food court"]}
+   lunch:{restaurants:[
+     {name:"PappaRich", link:"https://www.papparich.com.my/", note:"Suria KLCC, official site has the menu — Malaysian chain, broad veg and chicken sections", veg:"Vegetable fried rice or roti with dhal", chk:"Nasi lemak with fried chicken or chicken curry"},
+     {name:"Madam Kwan's", link:"https://madamkwans.com.my/", note:"Suria KLCC, official site has the menu", veg:"Vegetable fried kway teow", chk:"Their signature nasi lemak with chicken"},
+     {name:"Suria KLCC food court", link:"", note:"Multiple stalls, quick before the airport", veg:"A vegetarian stall", chk:"A chicken rice stall"}
+   ]}
  }},
 
  {date:"Sun Oct 18", loc:"Sydney", items:[
@@ -436,14 +410,18 @@ function renderFood(){
   el.innerHTML = itinerary.filter(d=>d.meals && Object.keys(d.meals).length).map(d => {
     const meals = mealOrder.filter(m=>d.meals[m]).map(m=>{
       const mm = d.meals[m];
-      const vegList = mm.veg.map(o=>`<li>${o}</li>`).join('');
-      const chkList = mm.chk.map(o=>`<li>${o}</li>`).join('');
+      const cards = mm.restaurants.map(r=>{
+        const nameHtml = r.link ? `<a href="${r.link}" target="_blank">${r.name}</a>` : r.name;
+        return `<div class="rcard">
+          <div class="rname">${nameHtml}</div>
+          ${r.note ? `<div class="rnote">${r.note}</div>` : ''}
+          <div><span class="veg">Veg pick:</span> ${r.veg}</div>
+          <div><span class="chk">Chicken pick:</span> ${r.chk}</div>
+        </div>`;
+      }).join('');
       return `<div class="meal">
         <h4>${m}</h4>
-        <div class="veg">Vegetarian</div>
-        <ul>${vegList}</ul>
-        <div class="chk">Chicken</div>
-        <ul>${chkList}</ul>
+        ${cards}
       </div>`;
     }).join('');
     return `<div class="day">
